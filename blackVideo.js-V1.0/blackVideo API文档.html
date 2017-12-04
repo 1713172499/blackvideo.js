@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>blackVideo V1.0 API文档</title>
+    <style media="screen">
+      *{
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+      }
+      ::selection{
+        color: #fff;
+        background-color: #fe917b;
+      }
+      body{
+        background-color: #eee;
+        padding: 0;
+        margin: 0;
+        font-size: 18px;
+      }
+      .top-title{
+        width: 100%;
+        height: auto;
+        font-size: 25px;
+        padding: 20px 0 20px 20px;
+        background-color: #333;
+        color: #eee;
+        font-weight: 600;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .main-content{
+        width: 1170px;
+        height: auto;
+        margin: 120px auto 50px auto;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+      }
+      .content-list{
+        width: 100%;
+        height: auto;
+        margin-bottom: 30px;
+      }
+      .content-title{
+        margin: 5px 0;
+        display: block;
+        width: 100%;
+        height: auto;
+        font-size: 18px;
+        font-weight: bold;
+        box-sizing: content-box;
+      }
+      .code-box{
+        width: 100%;
+        height: auto;
+        display: block;
+        padding: 10px 8px;
+        font-size: 12px;
+        background-color: #222;
+        border-radius: 5px;
+        line-height: 1.7;
+        color: #f8f8f8;
+        font-weight: 500;
+        border-left: 5px solid #666;
+        font-family: Source Code Pro, Consolas, Menlo, Monaco, Courier New, monospace;
+        margin: 5px 0;
+      }
+      .content-list p{
+        font-size: 12px;
+        padding-bottom: 5px;
+        color: #333;
+      }
+      .content-list pre{
+        font-size: 12px;
+        padding: 10px;
+        color: #333;
+        background-color: #222;
+        border-radius: 8px;
+        line-height: 1.7;
+        font-family: Source Code Pro, Consolas, Menlo, Monaco, Courier New, monospace;
+        color: #fff;
+        margin: 5px 0;
+      }
+      .example-box{
+        width: 100%;
+        height: auto;
+        background-color: #eee;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+      }
+      .parent-box{
+        margin: 0 auto;
+      }
+      a{
+        color:dodgerblue;
+      }
+      @media (min-width:768px){
+        .main-content{
+          width: 750px;
+          height: auto;
+        }
+      }
+      @media (min-width:992px){
+        .main-content{
+          width: 970px;
+          height: auto;
+        }
+      }
+      @media (min-width:1200px){
+        .main-content{
+          width: 1170px;
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="top-title">blackVideo.js V1.0 API使用文档</h1>
+    <div class="main-content">
+      <div class="content-list">
+        <h3 class="content-title">下载blackVideo.js</h3>
+        <span class="code-box">
+          请到GitHub上下载blackVideo.js源文件<br/>
+          GitHub地址: <a href="https://github.com/1713172499/blackvideo.js" target="_blank">https://github.com/1713172499/blackvideo.js</a>
+        </span>
+        <p>* IE8版本以及更早的版本不支持&lt;video&gt;标签</p>
+      </div>
+      <div class="content-list">
+        <h3 class="content-title">引入基础播放器控件样式,您可以根据显示效果自行更改CSS样式,达到最佳显示效果</h3>
+<pre>
+&lt;link rel="stylesheet" type="text/css" href="./fontello.css"&gt; //控件图标
+&lt;link rel="stylesheet" type="text/css" href="./blackVideo.css"&gt; //控件样式
+</pre>
+      </div>
+      <div class="content-list">
+        <h3 class="content-title">引入blackVideo.js后，实例化blackVideo构造函数</h3>
+        <span class="code-box">
+          var blackVideo = new videoStart( video element , parent element ,[ video width , video height ]);
+        </span>
+        <p>参数说明:</p>
+        <p><span style="color:#cf4944;font-weight:600;">video element（必选参数）：</span>video的DOM对象</p>
+        <p><span style="color:#cf4944;font-weight:600;">parent element（必选参数）：</span>播放器需要插入到这个父级元素的DOM对象后面</p>
+        <p><span style="color:#cf4944;font-weight:600;">video width（可选参数）：</span>播放器宽度 字符串类型、需要单位</p>
+        <p><span style="color:#cf4944;font-weight:600;">video height（可选参数）：</span>播放器高度 字符串类型、需要单位</p>
+        <p>* 您可以在video标签里指定播放器的宽高,也可以在构造函数里指定宽高,还可以使用我提供的可选方法来指定宽高.</p>
+<pre>例：下面例子往className盒子里面，添加一个宽500px高413px的播放器。
+
+HTML 代码:
+&lt;div class="parent-box"&gt;
+  &lt;video id="myVideo" src="videoPath"&gt;&lt;video&gt;
+&lt;/div&gt;
+
+JS 代码:
+var parentBox = document.getElementsByClassName("parent-box")[0];
+var myVideo = document.getElementById("myVideo");
+
+//实例化blackVideo
+var blackVideo = new videoStart( myVideo , parentBox , "500px" , "413px" );
+</pre>
+        <p>如果实例化成功,您会在控制台看到一条语句. -- blackVideo.js starting success!</p>
+      </div>
+      <div class="content-list">
+        <h3 class="content-title">设置blackVideo的控制台样式</h3>
+        <span class="code-box">
+          blackVideo.controlsStyle([ object ]);
+        </span>
+        <p>此方法的为可选方法，可自定义控件的颜色</p>
+<pre>
+以键值对的形式，值为颜色值
+
+可选属性如下：
+progressIng: 进度条已播放的背景色
+progressLoad: 进度条已缓冲的背景色
+progressBar: 进度条总长度的背景色
+progressBtn: 进度条按钮的背景色
+videoFiller: 视频补白背景色
+videoHeaderBGColor: 视频标题背景色
+videoHeaderFontColor: 视频标题字体色
+videoHeaderFontSize: 视频标题字体大小
+controlsBGColor: 控制台底部背景色
+volumeIng: 音量进度条背景色
+volumeBar: 音量总进度条背景色
+volumeBtn: 音量拖动按钮背景色
+playBtn: 播放按钮背景色
+currentColor: 当前播放时长背景色
+durationColor: 总播放时长背景色
+bisaColor: 播放时长与总时长中间的分割线的颜色
+hornColor: 喇叭按钮颜色
+downloadBGColor: 下载按钮框的颜色
+downloadBtnColor: 下载按钮的颜色
+</pre>
+<pre>
+例：
+blackVideo.controlsStyle({
+  progressIng : "#000",
+  progressLoad : "rgb(0,0,0)",
+  progressBar : "black"
+});
+</pre>
+      </div>
+      <div class="content-list">
+        <h3>启动控制台</h3>
+        <span class="code-box">
+          blackVideo.controlsStart([ isDownloadVideo , videoHeader ]);
+        </span>
+        <p>参数说明：</p>
+        <p><span style="color:#cf4944;font-weight:600;">isDownloadVideo（可选参数）：</span>是否下载视频，默认为 true</p>
+        <p><span style="color:#cf4944;font-weight:600;">videoHeader（可选参数）：</span>播放器标题，默认为最后一个 / 后面的所有字符串</p>
+<pre>
+例：
+blackVideo.controlsStart( true , "视频标题" );
+</pre>
+      </div>
+      <div class="content-list">
+        <h3>其它可选方法</h3>
+        <span class="code-box">
+          blackVideo.setWidth(); 设置播放器宽度 传入带有单位的值<br/>
+          blackVideo.setHeight();设置播放器高度 传入带有单位的值<br/>
+          blackVideo.videoPlay();开始播放<br/>
+          blackVideo.videoPause();暂停播放
+        </span>
+      </div>
+      <div class="content-list">
+        <h3>下面是实例:使用默认UI控件样式的播放器</h3><br/>
+        <p>用了几行js代码就完成了一个简洁的播放器,是不是很简单?</p>
+<pre>
+代码如下:
+
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./css/fontello.css" type="text/css"/&gt;  //引入控件图标
+    &lt;link rel="stylesheet" href="./css/blackVideo.css" type="text/css"/&gt;  //引入blackVideo的基本css样式
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div class="example-box"&gt;
+      &lt;div class="parent-box"&gt;&lt;/div&gt;
+      &lt;video src="./video.mp4" id="myVideo-one"&gt;&lt;/video&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;script src="./blackVideo.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    &lt;!-- 脚本部分 --&gt;
+    var parentBox = document.getElementsByClassName("parent-box")[0];
+    var myVideoOne = document.getElementById("myVideo-one");
+    var blackVideo = new videoStart(myVideoOne,parentBox,"700px","431px");
+    blackVideo.controlsStart();
+  &lt;/script&gt;
+&lt;/html&gt;
+</pre>
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="./css/fontello.css" type="text/css"/>
+    <link rel="stylesheet" href="./css/blackVideo.css" type="text/css"/>
+    <div class="example-box">
+      <div class="parent-box"></div>
+      <video src="./video.mp4" id="myVideo-one"></video>
+    </div>
+  </body>
+  <script src="./blackVideo.js"></script>
+  <script type="text/javascript">
+    var parentBox = document.getElementsByClassName("parent-box")[0];
+    var myVideoOne = document.getElementById("myVideo-one");
+    var blackVideo = new videoStart(myVideoOne,parentBox,"700px","431px");
+    blackVideo.controlsStart();
+  </script>
+</html>
